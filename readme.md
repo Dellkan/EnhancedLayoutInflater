@@ -7,13 +7,20 @@ Excuse the mess.
 Purpose
 ========
 EnhancedLayoutInflater (ELI) main purpose is to make the madness of android layoutinflater
-stable and extendable. It is heavily inspired by Calligraphy, and borrows several ideas
-and code from it. 
+stable and extendable. It is heavily inspired by Calligraphy 
+(specifically, how Calligraphy hacks the LayoutInflater and its factories), and borrows several 
+ideas and code from it.
+ 
+The long term goal is to replace the functionality of other libraries such as 
+Calligraphy and Robobinding, both doing heavy wizardry hacking on the LayoutInflater in a 
+non-compatible/non-extendable way. ELI seeks to remedy that, by building a stable LayoutInflater 
+that any third party (or you) can re-use without having to pack in their own LayoutInflater hacks.
 
 In and by itself through ELI alone, you should notice exactly zero difference in the layouts 
-you inflate. However, this will allow you to add in one or many "addons", that each get 
+you inflate. However, this will allow you to add in one or many hooks, that each get 
 callbacks and functionality that they can use modify the behaviour that occurs when 
-any view is inflated. Examples of such behaviours:
+any view is inflated.
+Examples of such behaviours:
  
  - Change or create new shortcuts 
  (such as LinearLayout instead of com.android.widgets.LinearLayout)
