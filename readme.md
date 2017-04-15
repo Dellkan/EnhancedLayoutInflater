@@ -23,7 +23,7 @@ any view is inflated.
 Examples of such behaviours:
  
  - Change or create new shortcuts 
- (such as LinearLayout instead of com.android.widgets.LinearLayout)
+ (such as `LinearLayout` instead of `com.android.widgets.LinearLayout`)
  - Add new attributes to both existing and custom/third-party widgets
  - Change existing attributes
  - Initialize `ListView`'s with items and itemlayout directly from the layout file
