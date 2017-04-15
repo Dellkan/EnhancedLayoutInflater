@@ -77,7 +77,6 @@ Weirdness, caveats and other peculiar behaviours
 
 Todo:
 ========
-
  - [x] Replicate basic layout inflation
  - [x] Hook into callbacks
  - [x] Setup callback registry
@@ -85,3 +84,9 @@ Todo:
  - [ ] Testing + weird platforms compatibility
  - [ ] Backwards compatibility
  - [ ] Addon system
+ 
+Similar libraries
+========
+ - https://github.com/madisp/pretty (Same purpose as ELI)
+ - https://github.com/chrisjenx/Calligraphy (Fonts)
+ - https://github.com/RoboBinding/RoboBinding (Full fledged databinding)
