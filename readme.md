@@ -32,18 +32,21 @@ Setup
 TODO
 
 ```java
-class MainActivity extends Activity {	
-    @Override
-    protected void attachBaseContext(Context newBase) {
-        super.attachBaseContext(new ELIContextWrapper(newBase, new ELI.Builder().addHook(new ViewHook() {
-            @Override
-            public void onViewCreated(@Nullable View parent, @NonNull View view, Context context, AttributeSet attrs) {
-                if (attrs.getAttributeValue(null, "somethingorother") != null) {
-                    view.setBackgroundColor(context.getResources().getColor(R.color.colorPrimary));
-                }
-            }
-        })));
-    }
+public class MainActivity extends AppCompatActivity {
+	@Override
+	protected void onCreate(Bundle savedInstanceState) {
+		super.onCreate(savedInstanceState);
+		setContentView(R.layout.activity_main);
+	}
+
+	@Override
+	protected void attachBaseContext(Context newBase) {
+		super.attachBaseContext(new ELIContextWrapper(newBase, new ELI.Builder()
+				.addHook(new CustomAttrHook())
+				.addHook(new StyleHook())
+				.addHook(new ThemeHook())
+		));
+	}
 }
 ```
 

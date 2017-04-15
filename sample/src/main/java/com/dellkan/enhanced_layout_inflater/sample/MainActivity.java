@@ -3,7 +3,6 @@ package com.dellkan.enhanced_layout_inflater.sample;
 import android.content.Context;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.view.LayoutInflater;
 
 import com.dellkan.enhanced_layout_inflater.ELI;
 import com.dellkan.enhanced_layout_inflater.ELIContextWrapper;
@@ -16,8 +15,6 @@ public class MainActivity extends AppCompatActivity {
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_main);
-
-		LayoutInflater inflater = getLayoutInflater();
 	}
 
 	@Override
