@@ -65,8 +65,8 @@ Weirdness, caveats and other peculiar behaviours
  attributes, however, it should be warned that this is poor XML practice. Include it when you can.
  Having it in there means you get a hint right in the attribute what the source of your attribute is.
  - The namespace URI can be anything, even invalid URI's such as 
- `xmlns:my_custom_namespace="SomethingCompletelyDifferent"`. Again, while possible, this is poor 
- practice and android studio will warn you against / throw a fit about it.
+ `xmlns:my_namespace="SomethingCompletelyDifferent"`. Again, while possible, this is poor 
+ practice and android studio throw a fit about it.
 
 Todo:
 ========
