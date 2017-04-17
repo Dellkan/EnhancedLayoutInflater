@@ -11,7 +11,7 @@ import com.dellkan.enhanced_layout_inflater.ELI;
 import com.dellkan.enhanced_layout_inflater.reflectionutils.ReflectionUtils;
 
 /**
- * This is where the real magic happens
+ * Second attempt - if ELIFactory1 & 2 fails, this is given a crack at it
  */
 @TargetApi(Build.VERSION_CODES.HONEYCOMB)
 public class ELIFactory2Private implements LayoutInflater.Factory2 {
@@ -57,8 +57,7 @@ public class ELIFactory2Private implements LayoutInflater.Factory2 {
 
 	/**
 	 * Nasty method to inflate custom layouts that haven't been handled else where. If this fails it
-	 * will fall back through to the PhoneLayoutInflater method of inflating custom views where
-	 * Calligraphy will NOT have a hook into.
+	 * will fall back through to the PhoneLayoutInflater method of inflating custom views
 	 *
 	 * @param parent      parent view
 	 * @param view        view if it has been inflated by this point, if this is not null this method
