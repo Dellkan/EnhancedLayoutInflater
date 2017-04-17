@@ -5,7 +5,7 @@ import android.util.AttributeSet;
 import android.view.LayoutInflater;
 import android.view.View;
 
-import com.dellkan.enhanced_layout_inflater.ELI;
+import com.dellkan.enhanced_layout_inflater.ELIConfig;
 
 
 /**
@@ -14,9 +14,9 @@ import com.dellkan.enhanced_layout_inflater.ELI;
  */
 public class ELIFactory1 implements LayoutInflater.Factory {
 	private LayoutInflater.Factory mFactory;
-	private ELI.Builder mConfigs;
+	private ELIConfig mConfigs;
 
-	public ELIFactory1(LayoutInflater.Factory mFactory, ELI.Builder configs) {
+	public ELIFactory1(LayoutInflater.Factory mFactory, ELIConfig configs) {
 		this.mFactory = mFactory;
 		mConfigs = configs;
 	}

@@ -12,13 +12,13 @@ import android.view.LayoutInflater;
  * from it, we ensure that all inflaters all over the activity is derived from ours.
  */
 public class ELIContextWrapper extends ContextWrapper {
-	public ELIContextWrapper(Context base, @Nullable ELI.Builder configs) {
+	private ELI mInflater;
+	private ELIConfig mConfigs;
+
+	public ELIContextWrapper(Context base, @Nullable ELIConfig configs) {
 		super(base);
 		mConfigs = configs;
 	}
-
-	private ELI mInflater;
-	private ELI.Builder mConfigs;
 
 	@Override
 	public Object getSystemService(String name) {

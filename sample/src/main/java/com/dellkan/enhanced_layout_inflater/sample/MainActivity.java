@@ -4,7 +4,7 @@ import android.content.Context;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 
-import com.dellkan.enhanced_layout_inflater.ELI;
+import com.dellkan.enhanced_layout_inflater.ELIConfig;
 import com.dellkan.enhanced_layout_inflater.ELIContextWrapper;
 import com.dellkan.enhanced_layout_inflater.sample.hooks.ActionbarTitleTest;
 import com.dellkan.enhanced_layout_inflater.sample.hooks.CustomAttrHook;
@@ -22,7 +22,7 @@ public class MainActivity extends AppCompatActivity {
 
 	@Override
 	protected void attachBaseContext(Context newBase) {
-		super.attachBaseContext(new ELIContextWrapper(newBase, new ELI.Builder()
+		super.attachBaseContext(new ELIContextWrapper(newBase, new ELIConfig.Builder()
 				.enablePostCallbacks()
 				.addHook(new CustomAttrHook())
 				.addHook(new StyleHook())
@@ -30,6 +30,7 @@ public class MainActivity extends AppCompatActivity {
 				.addHook(new StyleHook2())
 				.addHook(new ActionbarTitleTest())
 				.addHook(new ProgrammaticallyAddedViewTest())
+				.build()
 		));
 	}
 }

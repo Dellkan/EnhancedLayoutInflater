@@ -7,11 +7,7 @@ import android.util.AttributeSet;
 import android.view.LayoutInflater;
 import android.view.View;
 
-import com.dellkan.enhanced_layout_inflater.ELI;
-import com.dellkan.enhanced_layout_inflater.ViewHook;
-
-import java.util.ArrayList;
-import java.util.List;
+import com.dellkan.enhanced_layout_inflater.ELIConfig;
 
 /**
  * This is where the real magic happens
@@ -19,9 +15,9 @@ import java.util.List;
 @TargetApi(Build.VERSION_CODES.HONEYCOMB)
 public class ELIFactory2 implements LayoutInflater.Factory2 {
 	private LayoutInflater.Factory2 mFactory2;
-	private ELI.Builder mConfigs;
+	private ELIConfig mConfigs;
 
-	public ELIFactory2(LayoutInflater.Factory2 mFactory2, ELI.Builder configs) {
+	public ELIFactory2(LayoutInflater.Factory2 mFactory2, ELIConfig configs) {
 		this.mFactory2 = mFactory2;
 		mConfigs = configs;
 	}

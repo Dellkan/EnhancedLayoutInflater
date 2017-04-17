@@ -8,6 +8,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 
 import com.dellkan.enhanced_layout_inflater.ELI;
+import com.dellkan.enhanced_layout_inflater.ELIConfig;
 import com.dellkan.enhanced_layout_inflater.reflectionutils.ReflectionUtils;
 
 /**
@@ -17,9 +18,9 @@ import com.dellkan.enhanced_layout_inflater.reflectionutils.ReflectionUtils;
 public class ELIFactory2Private implements LayoutInflater.Factory2 {
 	private ELI layoutInflater;
 	private LayoutInflater.Factory2 mFactory2;
-	private ELI.Builder mConfigs;
+	private ELIConfig mConfigs;
 
-	public ELIFactory2Private(ELI layoutInflater, LayoutInflater.Factory2 mFactory2, ELI.Builder configs) {
+	public ELIFactory2Private(ELI layoutInflater, LayoutInflater.Factory2 mFactory2, ELIConfig configs) {
 		this.layoutInflater = layoutInflater;
 		this.mFactory2 = mFactory2;
 		mConfigs = configs;
