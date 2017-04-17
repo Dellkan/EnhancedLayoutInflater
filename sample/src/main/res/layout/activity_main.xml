@@ -1,106 +1,139 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout
+<ScrollView
 	xmlns:android="http://schemas.android.com/apk/res/android"
-	xmlns:app="http://schemas.android.com/apk/res-auto"
 	xmlns:test="mycustomnamespace"
 	xmlns:tools="http://schemas.android.com/tools"
-	android:orientation="vertical"
 	android:layout_width="match_parent"
-	android:layout_height="match_parent"
-	android:padding="20dp"
-	tools:context="com.dellkan.enhanced_layout_inflater.sample.MainActivity"
-	tools:ignore="HardcodedText">
-	<TextView
-		android:layout_width="match_parent"
-		android:layout_height="wrap_content"
-		android:text="Various tests below.\nRed box equals failed test.\nGreen box equals successful test"
-		android:textSize="20sp" />
-	<!-- Theme test -->
+	android:layout_height="match_parent">
+
 	<LinearLayout
-		android:orientation="horizontal"
+		android:orientation="vertical"
 		android:layout_width="match_parent"
-		android:layout_height="wrap_content"
-		android:gravity="center_vertical"
-		android:padding="20dp">
-		<LinearLayout
-			android:orientation="vertical"
-			android:layout_width="0dp"
+		android:layout_height="match_parent"
+		android:padding="20dp"
+		tools:context="com.dellkan.enhanced_layout_inflater.sample.MainActivity"
+		tools:ignore="HardcodedText">
+		<TextView
+			android:layout_width="match_parent"
 			android:layout_height="wrap_content"
-			android:layout_weight="1">
-			<TextView
-				android:layout_width="wrap_content"
-				android:layout_height="wrap_content"
-				android:text="Theme custom attribute test" />
-			<TextView
-				android:id="@+id/theme_test_info"
-				android:layout_width="wrap_content"
-				android:layout_height="wrap_content"
-				android:textColor="@color/text_info" />
-		</LinearLayout>
-		<View
-			android:id="@+id/test_theme"
-			android:layout_width="20dp"
-			android:layout_height="20dp"
-			android:background="@color/test_fail" />
-	</LinearLayout>
-	<!-- Style test test -->
-	<LinearLayout
-		android:orientation="horizontal"
-		android:layout_width="match_parent"
-		android:layout_height="wrap_content"
-		android:gravity="center_vertical"
-		android:padding="20dp">
+			android:text="Various tests below.\nRed box equals failed test.\nGreen box equals successful test"
+			android:textSize="20sp" />
+		<!-- Theme test -->
 		<LinearLayout
-			android:orientation="vertical"
-			android:layout_width="0dp"
+			android:orientation="horizontal"
+			android:layout_width="match_parent"
 			android:layout_height="wrap_content"
-			android:layout_weight="1">
-			<TextView
-				android:layout_width="wrap_content"
+			android:gravity="center_vertical"
+			android:padding="20dp">
+			<LinearLayout
+				android:orientation="vertical"
+				android:layout_width="0dp"
 				android:layout_height="wrap_content"
-				android:text="Style test" />
-			<TextView
-				android:id="@+id/style_test_info"
-				android:layout_width="wrap_content"
-				android:layout_height="wrap_content"
-				android:text=""
-				android:textColor="@color/text_info" />
+				android:layout_weight="1">
+				<TextView
+					android:layout_width="wrap_content"
+					android:layout_height="wrap_content"
+					android:text="Theme custom attribute test" />
+				<TextView
+					android:id="@+id/theme_test_info"
+					android:layout_width="wrap_content"
+					android:layout_height="wrap_content"
+					android:textColor="@color/text_info" />
+			</LinearLayout>
+			<View
+				android:id="@+id/test_theme"
+				android:layout_width="20dp"
+				android:layout_height="20dp"
+				android:background="@color/test_fail" />
 		</LinearLayout>
-		<View
-			android:id="@+id/test_style"
-			android:layout_width="20dp"
-			android:layout_height="20dp"
-			android:background="@color/test_fail"
-			style="@style/style_test" />
-	</LinearLayout>
-	<!-- Custom attr test -->
-	<LinearLayout
-		android:orientation="horizontal"
-		android:layout_width="match_parent"
-		android:layout_height="wrap_content"
-		android:gravity="center_vertical"
-		android:padding="20dp">
+		<!-- Style test test -->
 		<LinearLayout
-			android:orientation="vertical"
-			android:layout_width="0dp"
+			android:orientation="horizontal"
+			android:layout_width="match_parent"
 			android:layout_height="wrap_content"
-			android:layout_weight="1">
-			<TextView
-				android:layout_width="wrap_content"
+			android:gravity="center_vertical"
+			android:padding="20dp">
+			<LinearLayout
+				android:orientation="vertical"
+				android:layout_width="0dp"
 				android:layout_height="wrap_content"
-				android:text="Custom attr test" />
-			<TextView
-				android:id="@+id/custom_attr_test_info"
-				android:layout_width="wrap_content"
-				android:layout_height="wrap_content"
-				android:text=""
-				android:textColor="@color/text_info" />
+				android:layout_weight="1">
+				<TextView
+					android:layout_width="wrap_content"
+					android:layout_height="wrap_content"
+					android:text="Style test" />
+				<TextView
+					android:id="@+id/style_test_info"
+					android:layout_width="wrap_content"
+					android:layout_height="wrap_content"
+					android:text=""
+					android:textColor="@color/text_info" />
+			</LinearLayout>
+			<View
+				android:id="@+id/test_style"
+				android:layout_width="20dp"
+				android:layout_height="20dp"
+				android:background="@color/test_fail"
+				style="@style/style_test" />
 		</LinearLayout>
-		<View
-			android:id="@+id/test_attr"
-			android:layout_width="20dp"
-			android:layout_height="20dp"
-			android:background="@color/test_fail"
-			test:somethingorother="5" />
+		<!-- Custom attr test -->
+		<LinearLayout
+			android:orientation="horizontal"
+			android:layout_width="match_parent"
+			android:layout_height="wrap_content"
+			android:gravity="center_vertical"
+			android:padding="20dp">
+			<LinearLayout
+				android:orientation="vertical"
+				android:layout_width="0dp"
+				android:layout_height="wrap_content"
+				android:layout_weight="1">
+				<TextView
+					android:layout_width="wrap_content"
+					android:layout_height="wrap_content"
+					android:text="Custom attr test" />
+				<TextView
+					android:id="@+id/custom_attr_test_info"
+					android:layout_width="wrap_content"
+					android:layout_height="wrap_content"
+					android:text=""
+					android:textColor="@color/text_info" />
+			</LinearLayout>
+			<View
+				android:id="@+id/test_attr"
+				android:layout_width="20dp"
+				android:layout_height="20dp"
+				android:background="@color/test_fail"
+				test:somethingorother="5" />
+		</LinearLayout>
+		<!-- Custom theme test 2 -->
+		<LinearLayout
+			android:orientation="horizontal"
+			android:layout_width="match_parent"
+			android:layout_height="wrap_content"
+			android:gravity="center_vertical"
+			android:padding="20dp">
+			<LinearLayout
+				android:orientation="vertical"
+				android:layout_width="0dp"
+				android:layout_height="wrap_content"
+				android:layout_weight="1">
+				<TextView
+					android:layout_width="wrap_content"
+					android:layout_height="wrap_content"
+					android:text="Theme style test" />
+				<TextView
+					android:id="@+id/custom_theme_test2_info"
+					android:layout_width="wrap_content"
+					android:layout_height="wrap_content"
+					android:text=""
+					android:textColor="@color/text_info" />
+			</LinearLayout>
+			<View
+				android:id="@+id/test_theme_style"
+				android:layout_width="20dp"
+				android:layout_height="20dp"
+				android:background="@color/test_fail" />
+		</LinearLayout>
 	</LinearLayout>
-</LinearLayout>
+</ScrollView>

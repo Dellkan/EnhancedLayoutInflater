@@ -8,9 +8,15 @@
 		<item name="colorAccent">@color/colorAccent</item>
 
 		<item name="test">@color/test_success</item>
+
+		<item name="android:textViewStyle">@style/style_test2</item>
 	</style>
 
 	<style name="style_test">
+		<item name="test">@color/test_success</item>
+	</style>
+
+	<style name="style_test2" parent="@android:style/Widget.TextView">
 		<item name="test">@color/test_success</item>
 	</style>
 

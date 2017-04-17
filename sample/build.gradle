@@ -38,4 +38,5 @@ dependencies {
     compile('org.robobinding:robobinding:0.8.15-SNAPSHOT:with-aop-and-dependencies')
 //    testCompile 'junit:junit:4.12'
     compile project(path: ':enhanced_layout_inflater')
+    compile 'com.android.support:design:25.3.1'
 }

@@ -1,4 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-	<attr name="test" format="color|reference" />
+	<declare-styleable name="CustomTextView">
+		<attr name="test" format="color|reference" />
+	</declare-styleable>
 </resources>
