@@ -1,5 +1,6 @@
 package com.dellkan.enhanced_layout_inflater;
 
+import android.content.res.XmlResourceParser;
 import android.util.AttributeSet;
 
 public final class ELIUtils {
@@ -12,6 +13,16 @@ public final class ELIUtils {
 	public static boolean containsAttribute(AttributeSet attrs, String attributeName) {
 		for (int i = 0; i < attrs.getAttributeCount(); i++) {
 			if (attrs.getAttributeName(i).equals(attributeName)) {
+				return true;
+			}
+		}
+		return false;
+	}
+
+	public static boolean containsNamespace(AttributeSet attrs, String namespace) {
+		for (int i = 0; i < attrs.getAttributeCount(); i++) {
+			XmlResourceParser parser = (XmlResourceParser) attrs;
+			if (parser.getAttributeNamespace(i).equals(namespace)) {
 				return true;
 			}
 		}
