@@ -25,7 +25,7 @@ public abstract class ViewHook<ViewType extends View> {
 	 * @param attrs Attributes on the view, in raw form
 	 * @return Return true if this hook should trigger for this view
 	 */
-	public boolean shouldTrigger(@Nullable View parent, @NonNull View view, AttributeSet attrs) {
+	public boolean shouldTrigger(@Nullable View parent, @NonNull View view, @Nullable AttributeSet attrs) {
 		return clz.isAssignableFrom(view.getClass());
 	}
 
@@ -35,5 +35,5 @@ public abstract class ViewHook<ViewType extends View> {
 	 * @param view Target view
 	 * @param attrs Attributes on the view, in raw form
 	 */
-	public abstract void onViewCreated(@Nullable View parent, @NonNull ViewType view, AttributeSet attrs);
+	public abstract void onViewCreated(@Nullable View parent, @NonNull ViewType view, @Nullable AttributeSet attrs);
 }

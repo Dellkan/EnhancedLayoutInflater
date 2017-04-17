@@ -4,7 +4,6 @@ import java.lang.reflect.Field;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 import java.lang.reflect.Modifier;
-import java.util.Arrays;
 
 /**
  * @since 1.0
@@ -121,11 +120,21 @@ public class ReflectionUtils {
 	public static Method findMethod(Class<?> clazz, String name, Class<?>... paramTypes) {
 		Class<?> searchType = clazz;
 		while (searchType != null) {
-			Method[] methods = (searchType.isInterface() ? searchType.getMethods() : searchType.getDeclaredMethods());
-			for (Method method : methods) {
-				if (name.equals(method.getName()) &&
-						(paramTypes == null || Arrays.equals(paramTypes, method.getParameterTypes()))) {
-					return method;
+			for (Method method : searchType.getMethods()) {
+				if (name.equals(method.getName())) {
+					Class<?>[] methodParamTypes = method.getParameterTypes();
+					if (paramTypes.length == methodParamTypes.length) {
+						boolean matches = true;
+						for (int i = 0; i < methodParamTypes.length; i++) {
+							if (!methodParamTypes[i].isAssignableFrom(paramTypes[i])) {
+								matches = false;
+								break;
+							}
+						}
+						if (matches) {
+							return method;
+						}
+					}
 				}
 			}
 			searchType = searchType.getSuperclass();

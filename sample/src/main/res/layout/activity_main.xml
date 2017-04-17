@@ -135,5 +135,63 @@
 				android:layout_height="20dp"
 				android:background="@color/test_fail" />
 		</LinearLayout>
+		<!-- Actionbar(toolbar) test -->
+		<LinearLayout
+			android:orientation="horizontal"
+			android:layout_width="match_parent"
+			android:layout_height="wrap_content"
+			android:gravity="center_vertical"
+			android:padding="20dp">
+			<LinearLayout
+				android:orientation="vertical"
+				android:layout_width="0dp"
+				android:layout_height="wrap_content"
+				android:layout_weight="1">
+				<TextView
+					android:layout_width="wrap_content"
+					android:layout_height="wrap_content"
+					android:text="Actionbar/toolbar test" />
+				<TextView
+					android:id="@+id/actionbar_test_info"
+					android:layout_width="wrap_content"
+					android:layout_height="wrap_content"
+					android:text=""
+					android:textColor="@color/text_info" />
+			</LinearLayout>
+			<View
+				android:id="@+id/actionbar_test"
+				android:layout_width="20dp"
+				android:layout_height="20dp"
+				android:background="@color/test_fail" />
+		</LinearLayout>
+		<!-- Programmatically added view test -->
+		<LinearLayout
+			android:orientation="horizontal"
+			android:layout_width="match_parent"
+			android:layout_height="wrap_content"
+			android:gravity="center_vertical"
+			android:padding="20dp">
+			<LinearLayout
+				android:orientation="vertical"
+				android:layout_width="0dp"
+				android:layout_height="wrap_content"
+				android:layout_weight="1">
+				<TextView
+					android:layout_width="wrap_content"
+					android:layout_height="wrap_content"
+					android:text="Programmatically added view test" />
+				<TextView
+					android:id="@+id/programmatically_test_info"
+					android:layout_width="wrap_content"
+					android:layout_height="wrap_content"
+					android:text=""
+					android:textColor="@color/text_info" />
+			</LinearLayout>
+			<View
+				android:id="@+id/programmatically_test"
+				android:layout_width="20dp"
+				android:layout_height="20dp"
+				android:background="@color/test_fail" />
+		</LinearLayout>
 	</LinearLayout>
 </ScrollView>

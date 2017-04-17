@@ -7,10 +7,12 @@ public final class ELIUtils {
 	public static boolean containsAttribute(AttributeSet attrs, String namespace, String attributeName) {
 		// If we have both namespace and attributeName ready, there's no reason to dillydally,
 		// just check directly.
+		if (attrs == null) { return false; }
 		return attrs.getAttributeValue(namespace, attributeName) != null;
 	}
 
 	public static boolean containsAttribute(AttributeSet attrs, String attributeName) {
+		if (attrs == null) { return false; }
 		for (int i = 0; i < attrs.getAttributeCount(); i++) {
 			if (attrs.getAttributeName(i).equals(attributeName)) {
 				return true;
@@ -20,6 +22,7 @@ public final class ELIUtils {
 	}
 
 	public static boolean containsNamespace(AttributeSet attrs, String namespace) {
+		if (attrs == null) { return false; }
 		for (int i = 0; i < attrs.getAttributeCount(); i++) {
 			XmlResourceParser parser = (XmlResourceParser) attrs;
 			if (parser.getAttributeNamespace(i).equals(namespace)) {
@@ -30,6 +33,7 @@ public final class ELIUtils {
 	}
 
 	public static String getAttributeValue(AttributeSet attrs, String attributeName) {
+		if (attrs == null) { return null; }
 		for (int i = 0; i < attrs.getAttributeCount(); i++) {
 			if (attrs.getAttributeName(i).equals(attributeName)) {
 				return attrs.getAttributeValue(i);

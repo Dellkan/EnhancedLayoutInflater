@@ -13,6 +13,7 @@ import android.view.ViewGroup;
 
 import com.dellkan.enhanced_layout_inflater.factories.ELIFactory1;
 import com.dellkan.enhanced_layout_inflater.factories.ELIFactory2;
+import com.dellkan.enhanced_layout_inflater.factories.ELIFactory2Private;
 import com.dellkan.enhanced_layout_inflater.reflectionutils.ReflectionUtils;
 
 import org.xmlpull.v1.XmlPullParser;
@@ -21,9 +22,29 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * We don't really have much work to do within the layoutInflater itself, but rather
- * we use this to mess with the various factories within. Those factories are where the real magic
- * happens
+ *  The majority of work is actually done through the factories (ELIFactory1 & 2). However,
+ *  because has majorly screwed us over and over with inconsistencies and bugs through the
+ *  LayoutInflater, we have to jump through several hoops to get our callbacks workin'.
+ *
+ *  In short, our calls are dictated by
+ *  {@link LayoutInflater#createViewFromTag(View, String, Context, AttributeSet, boolean)} which
+ *  runs through the following methods in this respective order until a view is given.
+ *
+ *  <ul>
+ *  <li>{@link LayoutInflater.Factory2#onCreateView(View, String, Context, AttributeSet)} or
+ *  {@link LayoutInflater.Factory#onCreateView(String, Context, AttributeSet)} if Factory2 isn't set
+ *  </li>
+ *  <li>{@link LayoutInflater.Factory2#onCreateView(View, String, Context, AttributeSet)} through
+ *  {@link LayoutInflater.mPrivateFactory}</li>
+ *  <li>{@link LayoutInflater#createView(String, String, AttributeSet)}</li>
+ *  </ul>
+ *
+ *  If all of these fails, we're left without a view.
+ *
+ *  Robobinding and Calligraphy both runs {@link LayoutInflater#createView(String, String, AttributeSet)}
+ *  manually, because it's set to final, and we're not allowed to overwrite it. This code directly steals
+ *  createCustomViewInternal from Calligraphy, as it seems to be slightly more efficient and readable than
+ *  Robobinding's attempt
  */
 public class ELI extends LayoutInflater {
 	private static final String[] sClassPrefixList = {
@@ -155,17 +176,12 @@ public class ELI extends LayoutInflater {
 	private void setPrivateFactoryInternal() {
 		// Already tried to set the factory.
 		if (mSetPrivateFactory) return;
-		// Skip if not attached to an activity.
-		if (!(getContext() instanceof Factory2)) {
-			mSetPrivateFactory = true;
-			return;
-		}
 
 		Factory2 privateFactory = getPrivateFactory();
 		ReflectionUtils.tryToInvokeMethod(
 				this,
 				"setPrivateFactory",
-				new ELIFactory2(privateFactory != null ? privateFactory : (Factory2) getContext(), mConfigs)
+				new ELIFactory2Private(this, privateFactory != null ? privateFactory : (Factory2) getContext(), mConfigs)
 		);
 
 		mSetPrivateFactory = true;
@@ -181,18 +197,51 @@ public class ELI extends LayoutInflater {
 
 	public static class Builder {
 		private List<ViewHook> hooks = new ArrayList<>();
+		private boolean enablePostCallbacks = false;
 		public Builder addHook(ViewHook hook) {
 			hooks.add(hook);
 			return this;
 		}
 
-		public void onViewCreated(@Nullable View parent, @NonNull View view, AttributeSet attrs) {
+		/**
+		 * Enable callbacks for views added programmatically
+		 * @return Builder
+		 */
+		public Builder enablePostCallbacks() {
+			this.enablePostCallbacks = true;
+			return this;
+		}
+
+		public void onViewCreated(@Nullable View parent, @NonNull View view, @Nullable AttributeSet attrs) {
 			for (ViewHook hook : hooks) {
 				if (hook.shouldTrigger(parent, view, attrs)) {
 					hook.onViewCreated(parent, view, attrs);
 				}
 			}
 
+			// If the view was created manually (new View(Context)), it won't trigger our callbacks.
+			// But, if the view itself adds children in the constructor, we could check for children
+			// after the view has been created - and trigger the callback for those at least. Of
+			// course, we won't have access to AttributeSet, since those aren't actually created. But,
+			// you can still do some interesting things from the style or Theme
+			if (view instanceof ViewGroup) {
+				ViewGroup viewGroup = (ViewGroup) view;
+
+				// Another option: HierarchyChangeListener. This should trigger for views that are
+				// added programmatically, after the initial setup.
+				if (enablePostCallbacks) {
+					viewGroup.setOnHierarchyChangeListener(new ViewGroup.OnHierarchyChangeListener() {
+						@Override public void onChildViewAdded(View parent, View child) {
+							onViewCreated(parent, child, null);
+						}
+						@Override public void onChildViewRemoved(View parent, View child) {}
+					});
+				}
+
+				for (int i = 0; i < ((ViewGroup) view).getChildCount(); i++) {
+					onViewCreated(view, viewGroup.getChildAt(i), null);
+				}
+			}
 		}
 	}
 }
