@@ -12,7 +12,7 @@ import com.dellkan.enhanced_layout_inflater.ELIConfig;
 import com.dellkan.enhanced_layout_inflater.reflectionutils.ReflectionUtils;
 
 /**
- * Second attempt - if ELIFactory1 & 2 fails, this is given a crack at it
+ * Second attempt - if ELIFactory1 &amp; 2 fails, this is given a crack at it
  */
 @TargetApi(Build.VERSION_CODES.HONEYCOMB)
 public class ELIFactory2Private implements LayoutInflater.Factory2 {

@@ -9,6 +9,7 @@ import android.util.AttributeSet;
 import android.view.View;
 import android.widget.TextView;
 
+import com.dellkan.enhanced_layout_inflater.ELIContext;
 import com.dellkan.enhanced_layout_inflater.hooks.TypedAttributeViewHook;
 import com.dellkan.enhanced_layout_inflater.sample.R;
 
@@ -18,13 +19,13 @@ public class StyleHook2 extends TypedAttributeViewHook<TextView> {
 	}
 
 	@Override
-	public boolean shouldTrigger(@Nullable View parent, @NonNull View view, AttributeSet attrs) {
-		return super.shouldTrigger(parent, view, attrs) && view.getId() == R.id.custom_theme_test2_info;
+	public boolean shouldTrigger(ELIContext eliContext, @Nullable View parent, @NonNull View view, AttributeSet attrs) {
+		return super.shouldTrigger(eliContext, parent, view, attrs) && view.getId() == R.id.custom_theme_test2_info;
 	}
 
 	@SuppressLint("SetTextI18n")
 	@Override
-	public void onViewCreated(@Nullable View parent, @NonNull final TextView view, @NonNull TypedArray attrs) {
+	public void onViewCreated(ELIContext eliContext, @Nullable View parent, @NonNull final TextView view, @NonNull TypedArray attrs) {
 		view.setText("This runs if this TextView has a style-theme that includes the R.styleable.CustomTextView");
 
 		final int color = attrs.getColor(R.styleable.CustomTextView_test, 0);

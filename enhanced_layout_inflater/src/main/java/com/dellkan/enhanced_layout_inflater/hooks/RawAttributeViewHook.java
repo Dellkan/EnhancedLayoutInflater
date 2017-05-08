@@ -5,7 +5,8 @@ import android.support.annotation.Nullable;
 import android.util.AttributeSet;
 import android.view.View;
 
-import com.dellkan.enhanced_layout_inflater.ELIUtils;
+import com.dellkan.enhanced_layout_inflater.ELIContext;
+import com.dellkan.enhanced_layout_inflater.ViewAttributes;
 import com.dellkan.enhanced_layout_inflater.ViewHook;
 
 /**
@@ -27,10 +28,26 @@ public abstract class RawAttributeViewHook<ViewType extends View> extends ViewHo
 		this.attributeName = attributeName;
 	}
 
+	public String getAttributeNamespace() {
+		return attributeNamespace;
+	}
+
+	public String getAttributeName() {
+		return attributeName;
+	}
+
 	@Override
-	public boolean shouldTrigger(@Nullable View parent, @NonNull View view, AttributeSet attrs) {
+	public void onViewCreatedRaw(ELIContext eliContext, @Nullable View parent, @NonNull ViewType view, @Nullable AttributeSet attrs) {
+		ViewAttributes attributes = new ViewAttributes(attrs);
+		if (shouldTrigger(eliContext, parent, view, attrs)) {
+			onViewCreated(eliContext, parent, view, attrs);
+			onViewCreated(eliContext, parent, view, attributes);
+		}
+	}
+
+	public boolean shouldTrigger(ELIContext eliContext, @Nullable View parent, @NonNull View view, ViewAttributes attributes) {
 		// Check if the view is appropriate
-		if (!super.shouldTrigger(parent, view, attrs)) {
+		if (!super.shouldTrigger(eliContext, parent, view, null)) {
 			return false;
 		}
 
@@ -39,15 +56,25 @@ public abstract class RawAttributeViewHook<ViewType extends View> extends ViewHo
 			return false;
 		}
 
-		if (attributeNamespace != null && attributeName == null) {
-			// Run if we want all attributes as long as they have the appropriate namespace
-			return ELIUtils.containsNamespace(attrs, attributeNamespace);
-		} else if (attributeNamespace == null) {
-			// Run if we only care about the attribute, independently of the namespace
-			return ELIUtils.containsAttribute(attrs, attributeName);
-		} else {
-			// Run if we care about a specific attribute in a specific namespace
-			return ELIUtils.containsAttribute(attrs, attributeNamespace, attributeName);
-		}
+		return attributes.contains(attributeNamespace, attributeName, null);
 	}
+
+	/**
+	 * In all likelyhood, you'll get more use out of {@link #onViewCreated(ELIContext, View, View, ViewAttributes)}.
+	 * This will still be called, in case you need it though.
+	 * @param eliContext A summary context containing all the relevant pieces of information used in an inflation
+	 * through ELI
+	 * @param parent
+	 * @param view Target view
+	 * @param attrs Attributes on the view, in raw form
+	 *
+	 * @see #onViewCreated(ELIContext, View, View, ViewAttributes)
+	 * @see #onViewCreatedRaw(ELIContext, View, View, AttributeSet)
+	 */
+	@Override
+	public void onViewCreated(ELIContext eliContext, @Nullable View parent, @NonNull ViewType view, @Nullable AttributeSet attrs) {
+
+	}
+
+	public abstract void onViewCreated(ELIContext eliContext, @Nullable View parent, @NonNull ViewType view, @NonNull ViewAttributes attrs);
 }

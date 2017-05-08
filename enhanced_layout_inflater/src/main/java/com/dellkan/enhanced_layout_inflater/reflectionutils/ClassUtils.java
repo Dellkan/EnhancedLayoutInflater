@@ -149,7 +149,7 @@ public class ClassUtils {
 	 * calculating assignability between primitive and wrapper types
 	 * <em>corresponding
 	 * to the running Java version</em>; i.e. autoboxing will be the default
-	 * behavior in VMs running Java versions >= 1.5.
+	 * behavior in VMs running Java versions &gt;= 1.5.
 	 * </p>
 	 *
 	 * @param cls

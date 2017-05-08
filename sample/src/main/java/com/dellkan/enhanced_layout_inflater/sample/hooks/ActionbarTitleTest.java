@@ -9,6 +9,7 @@ import android.util.AttributeSet;
 import android.view.View;
 import android.widget.TextView;
 
+import com.dellkan.enhanced_layout_inflater.ELIContext;
 import com.dellkan.enhanced_layout_inflater.ViewHook;
 import com.dellkan.enhanced_layout_inflater.sample.R;
 
@@ -18,7 +19,7 @@ public class ActionbarTitleTest extends ViewHook<Toolbar> {
 	}
 
 	@Override
-	public void onViewCreated(@Nullable View parent, @NonNull final Toolbar toolbar, AttributeSet attrs) {
+	public void onViewCreated(ELIContext eliContext, @Nullable View parent, @NonNull final Toolbar toolbar, AttributeSet attrs) {
 		toolbar.setTitle("Enhanced Layout Inflater");
 		/*
 			This test is all about the toolbar - which happen to create-add children programmatically,

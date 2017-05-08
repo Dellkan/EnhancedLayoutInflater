@@ -1,13 +1,13 @@
 package com.dellkan.enhanced_layout_inflater.hooks;
 
 import android.content.res.TypedArray;
-import android.support.annotation.AttrRes;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.annotation.StyleableRes;
 import android.util.AttributeSet;
 import android.view.View;
 
+import com.dellkan.enhanced_layout_inflater.ELIContext;
 import com.dellkan.enhanced_layout_inflater.ViewHook;
 
 /**
@@ -33,8 +33,8 @@ public abstract class TypedAttributeViewHook<ViewType extends View> extends View
 	}
 
 	@Override
-	public boolean shouldTrigger(@Nullable View parent, @NonNull View view, AttributeSet attrs) {
-		if (!super.shouldTrigger(parent, view, attrs)) {
+	public boolean shouldTrigger(ELIContext eliContext, @Nullable View parent, @NonNull View view, AttributeSet attrs) {
+		if (!super.shouldTrigger(eliContext, parent, view, attrs)) {
 			return false;
 		}
 
@@ -52,15 +52,15 @@ public abstract class TypedAttributeViewHook<ViewType extends View> extends View
 	}
 
 	@Override
-	public void onViewCreated(@Nullable View parent, @NonNull ViewType view, AttributeSet attrs) {
+	public void onViewCreated(ELIContext eliContext, @Nullable View parent, @NonNull ViewType view, AttributeSet attrs) {
 		TypedArray values = view.getContext().obtainStyledAttributes(attrs, attributes);
 
 		try {
-			onViewCreated(parent, view, values);
+			onViewCreated(eliContext, parent, view, values);
 		} finally {
 			values.recycle();
 		}
 	}
 
-	public abstract void onViewCreated(@Nullable View parent, @NonNull ViewType view, @NonNull TypedArray attrs);
+	public abstract void onViewCreated(ELIContext eliContext, @Nullable View parent, @NonNull ViewType view, @NonNull TypedArray attrs);
 }

@@ -8,15 +8,20 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 public class ELIConfig {
 	private List<ViewHook> hooks = new ArrayList<>();
 	private boolean enablePostCallbacks = false;
-	private Map<View, Integer> refCount = new HashMap<>();
-	private static final boolean debugCallCount = false;
+
+	private ELIContext eliContext;
+	void preInflation(ELIContext eliContext) {
+		this.eliContext = eliContext;
+	}
+
+	void postInflation(ELIContext eliContext) {
+		this.eliContext = null;
+	}
 
 	/**
 	 * Purpose: Delegate the "Oh, a view has been created" callback to all the registered hooks.
@@ -24,26 +29,13 @@ public class ELIConfig {
 	 * Gathering points for all the various methods or places that can create a view. This should be
 	 * called exactly once for each and all views.
 	 *
-	 * @param parent The parent view, if any
 	 * @param view The view in question
 	 * @param attrs The attributeset, containing all the xml attributes set on this view
 	 */
 	public void onViewCreated(@Nullable View parent, @NonNull View view, @Nullable AttributeSet attrs) {
-		// There's a lot of calls and things that could go wrong. The bit below is mainly just to
-		// debug that. Pay no mind to it for your production usage.
-		if (debugCallCount) {
-			if (!refCount.containsKey(view)) {
-				refCount.put(view, 1);
-			} else {
-				refCount.put(view, refCount.get(view) + 1);
-			}
-		}
-
 		// Iterate through all the hooks, and let them know about the new-born view
 		for (ViewHook hook : hooks) {
-			if (hook.shouldTrigger(parent, view, attrs)) {
-				hook.onViewCreated(parent, view, attrs);
-			}
+			hook.onViewCreatedRaw(eliContext, parent, view, attrs);
 		}
 
 		// If the view was created manually (new View(Context)), it won't trigger our callbacks

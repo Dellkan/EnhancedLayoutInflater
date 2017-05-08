@@ -3,6 +3,7 @@ package com.dellkan.enhanced_layout_inflater;
 import android.annotation.TargetApi;
 import android.content.Context;
 import android.os.Build;
+import android.support.annotation.LayoutRes;
 import android.support.annotation.Nullable;
 import android.support.annotation.RequiresApi;
 import android.util.AttributeSet;
@@ -26,7 +27,7 @@ import org.xmlpull.v1.XmlPullParser;
  *  few hoops to get everything running. Our work here is largely inspired by the work done in
  *  Calligraphy, with a few pinches of spice from Robobinding and our own (misguided) ideas.
  *
- *  The majority of work is actually done through the factories (ELIFactory1 & 2)
+ *  The majority of work is actually done through the factories (ELIFactory1 &amp; 2)
  *  (or should have been, anyway). However, we have to put in quite a few work-arounds and backups in
  *  here as well.
  *
@@ -67,13 +68,13 @@ public class ELI extends LayoutInflater {
 	};
 	private ELIConfig mConfigs;
 
-	protected ELI(Context context, ELIConfig configs) {
+	public ELI(Context context, ELIConfig configs) {
 		super(context);
 		mConfigs = configs;
 		wrapFactories(false);
 	}
 
-	protected ELI(LayoutInflater original, Context newContext, boolean cloned, ELIConfig configs) {
+	public ELI(LayoutInflater original, Context newContext, boolean cloned, ELIConfig configs) {
 		super(original, newContext);
 		mConfigs = configs;
 		wrapFactories(cloned);
@@ -103,10 +104,11 @@ public class ELI extends LayoutInflater {
 				// Sets both Factory/Factory2
 				setFactory2(getFactory2());
 			}
-		}
-		// We can do this as setFactory2 is used for both methods.
-		if (getFactory() != null) {
-			setFactory(getFactory());
+		} else {
+			// We can do this as setFactory2 is used for both methods.
+			if (getFactory() != null) {
+				setFactory(getFactory());
+			}
 		}
 	}
 
@@ -124,6 +126,26 @@ public class ELI extends LayoutInflater {
 	/*
 		Inflation stuff
 	 */
+	@Override
+	public View inflate(@LayoutRes int resource, @Nullable ViewGroup root, boolean attachToRoot) {
+		return inflate(resource, root, attachToRoot, null);
+	}
+
+	public View inflate(@LayoutRes int resource, @Nullable ViewGroup root, boolean attachToRoot, @Nullable ELIContext.Builder extraData) {
+		if (extraData == null) {
+			extraData = new ELIContext.Builder();
+		}
+		ELIContext eliContext = extraData.build(this, mConfigs, resource, attachToRoot);
+		try {
+			mConfigs.preInflation(eliContext);
+			return super.inflate(resource, root, attachToRoot);
+		} finally {
+			// When we get this far, all hooks will have run. There is no reason to keep the
+			// ELIContext around in memory any further.
+			mConfigs.postInflation(eliContext);
+		}
+	}
+
 	/**
 	 * The LayoutInflater onCreateView is the fourth port of call for LayoutInflation.
 	 * BUT only for none CustomViews.

@@ -9,6 +9,7 @@ import android.util.AttributeSet;
 import android.view.View;
 import android.widget.TextView;
 
+import com.dellkan.enhanced_layout_inflater.ELIContext;
 import com.dellkan.enhanced_layout_inflater.ViewHook;
 import com.dellkan.enhanced_layout_inflater.sample.R;
 
@@ -18,12 +19,12 @@ public class ProgrammaticallyAddedViewTest extends ViewHook<TextView> {
 	}
 
 	@Override
-	public boolean shouldTrigger(@Nullable View parent, @NonNull View view, @Nullable AttributeSet attrs) {
-		return super.shouldTrigger(parent, view, attrs) && parent instanceof Toolbar && attrs == null;
+	public boolean shouldTrigger(ELIContext eliContext, @Nullable View parent, @NonNull View view, @Nullable AttributeSet attrs) {
+		return super.shouldTrigger(eliContext, parent, view, attrs) && parent instanceof Toolbar && attrs == null;
 	}
 
 	@Override
-	public void onViewCreated(@Nullable View parent, @NonNull final TextView toolbar, AttributeSet attrs) {
+	public void onViewCreated(ELIContext eliContext, @Nullable View parent, @NonNull final TextView toolbar, AttributeSet attrs) {
 		/*
 			This test is all about the toolbar - which happen to create-add children programmatically,
 			which we want to make sure we pick up right. However, those results we would like to display

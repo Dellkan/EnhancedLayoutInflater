@@ -8,6 +8,7 @@ import android.util.AttributeSet;
 import android.view.View;
 import android.widget.TextView;
 
+import com.dellkan.enhanced_layout_inflater.ELIContext;
 import com.dellkan.enhanced_layout_inflater.hooks.TypedAttributeViewHook;
 import com.dellkan.enhanced_layout_inflater.sample.R;
 
@@ -18,13 +19,13 @@ public class StyleHook extends TypedAttributeViewHook {
 	}
 
 	@Override
-	public boolean shouldTrigger(@Nullable View parent, @NonNull View view, AttributeSet attrs) {
+	public boolean shouldTrigger(ELIContext eliContext, @Nullable View parent, @NonNull View view, AttributeSet attrs) {
 		return view.getId() == R.id.test_style;
 	}
 
 	@SuppressLint("SetTextI18n")
 	@Override
-	public void onViewCreated(@Nullable View parent, @NonNull View view, @NonNull TypedArray attrs) {
+	public void onViewCreated(ELIContext eliContext, @Nullable View parent, @NonNull View view, @NonNull TypedArray attrs) {
 		int colorRef = attrs.getColor(R.styleable.CustomTextView_test, 0);
 		view.setBackgroundColor(colorRef);
 
