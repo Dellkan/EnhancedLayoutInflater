@@ -2,7 +2,7 @@ apply plugin: 'com.android.application'
 
 android {
     compileSdkVersion 25
-    buildToolsVersion "25.0.2"
+    buildToolsVersion "26.0.1"
     defaultConfig {
         applicationId "com.dellkan.enhanced_layout_inflater.sample"
         minSdkVersion 11
@@ -34,7 +34,7 @@ repositories {
 dependencies {
     compile 'com.android.support:appcompat-v7:25.3.1'
     compile 'com.android.support.constraint:constraint-layout:1.0.2'
-    compile 'uk.co.chrisjenx:calligraphy:2.2.1-DEV'
+    //compile 'uk.co.chrisjenx:calligraphy:2.2.1-DEV'
     compile('org.robobinding:robobinding:0.8.15-SNAPSHOT:with-aop-and-dependencies')
 //    testCompile 'junit:junit:4.12'
     compile project(path: ':enhanced_layout_inflater')

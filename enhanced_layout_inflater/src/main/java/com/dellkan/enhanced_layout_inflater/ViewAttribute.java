@@ -25,7 +25,7 @@ public class ViewAttribute {
 		return attributeName;
 	}
 
-	public String getValue() {
+	public String getRawValue() {
 		return value;
 	}
 }
