@@ -4,9 +4,10 @@ buildscript {
     repositories {
         mavenLocal()
         jcenter()
+        google()
     }
     dependencies {
-        classpath 'com.android.tools.build:gradle:3.0.0-alpha9'
+        classpath 'com.android.tools.build:gradle:3.0.1'
         classpath 'com.novoda:bintray-release:0.5.0'
 
         // NOTE: Do not place your application dependencies here; they belong
@@ -17,6 +18,7 @@ buildscript {
 allprojects {
     repositories {
         jcenter()
+        google()
     }
 
     // At the moment, docs are giving us build errors. Seems to be an issue in bintray-release.

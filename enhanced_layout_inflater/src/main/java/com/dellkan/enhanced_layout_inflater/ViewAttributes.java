@@ -70,9 +70,27 @@ public class ViewAttributes {
 		return attributes;
 	}
 
+	public boolean contains(String namespace, String attributeName) {
+        for (ViewAttribute attribute : viewAttributes) {
+            if (attribute.contains(namespace, attributeName, null)) {
+                return true;
+            }
+        }
+        return false;
+    }
+
 	public boolean contains(String namespace, String attributeName, String value) {
 		for (ViewAttribute attribute : viewAttributes) {
 			if (attribute.contains(namespace, attributeName, value)) {
+				return true;
+			}
+		}
+		return false;
+	}
+
+	public boolean contains(String qualifiedAttributeName) {
+		for (ViewAttribute attribute : viewAttributes) {
+			if (attribute.contains(qualifiedAttributeName)) {
 				return true;
 			}
 		}

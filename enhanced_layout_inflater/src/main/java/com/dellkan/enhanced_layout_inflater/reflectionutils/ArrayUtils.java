@@ -25,6 +25,7 @@ package com.dellkan.enhanced_layout_inflater.reflectionutils;
  * @version $Revision: 1.0 $
  * @author Cheng Wei
  */
+@SuppressWarnings("JavadocReference")
 public class ArrayUtils {
 
 	/**

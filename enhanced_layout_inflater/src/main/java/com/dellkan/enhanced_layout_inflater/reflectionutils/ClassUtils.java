@@ -10,6 +10,7 @@ import java.util.Map;
  * @version $Revision: 1.0 $
  * @author Cheng Wei
  */
+@SuppressWarnings("JavadocReference")
 public class ClassUtils {
 	/**
 	 * Maps primitive {@code Class}es to their corresponding wrapper
