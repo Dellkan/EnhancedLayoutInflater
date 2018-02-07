@@ -8,9 +8,9 @@ public class ViewAttribute {
 	private String value;
 
 	public ViewAttribute(String qualifiedAttributeName) {
-		String[] parts = qualifiedAttributeName.split(":", 2);
-		this.namespace = parts[0];
-		this.attributeName = parts[1];
+		int delimiter = qualifiedAttributeName.lastIndexOf(":");
+		this.namespace = qualifiedAttributeName.substring(0, delimiter);
+		this.attributeName = qualifiedAttributeName.substring(delimiter + 1);
 	}
 
 	public ViewAttribute(String namespace, String attributeName, String value) {
